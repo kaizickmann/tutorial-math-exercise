@@ -25,6 +25,16 @@
   text-align: center;
 }
 
+.content {
+  position: absolute;
+  top: 5em;
+  left: 1em;
+  right: 1em;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
 a,
 a:visited,
 a:hover {
