@@ -16,20 +16,20 @@ describe('TaskProducerService', () => {
   });
 
   it('should generate random: (0,0)', () => {
-    expect(service.getRandomInInterval(0, 0)).toEqual(0);
+    expect(service.getRandomInInterval({ lower: 0, higher: 0 })).toEqual(0);
   });
 
   it('should generate random: (1,1)', () => {
-    expect(service.getRandomInInterval(1, 1)).toEqual(1);
+    expect(service.getRandomInInterval({ lower: 1, higher: 1 })).toEqual(1);
   });
 
   it('should generate random: (42,42)', () => {
-    expect(service.getRandomInInterval(42, 42)).toEqual(42);
+    expect(service.getRandomInInterval({ lower: 42, higher: 42 })).toEqual(42);
   });
 
   it('should fail by generate random: (42,23)', () => {
     try {
-      expect(service.getRandomInInterval(42, 23));
+      expect(service.getRandomInInterval({ lower: 42, higher: 23 }));
       fail("Expected config error!");
     } catch (error) {
       // expected

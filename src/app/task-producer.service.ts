@@ -3,6 +3,11 @@ import { Task } from './domain/task';
 import { TaskCategory } from './domain/task-category';
 import { Operation } from './domain/operation';
 
+interface OrderedPair {
+  lower: number;
+  higher: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,40 +16,55 @@ export class TaskProducerService {
   constructor() { }
 
   public createTask(definition: TaskCategory): Task {
-    return this.createAddSubTask(definition);
+    switch (definition.operation) {
+      case Operation.ADDITION:
+        return this.createAddTask(definition);
+      case Operation.SUBTRACTION:
+        return this.createSubTask(definition);
+      default:
+        throw "Unsupported operation: " + definition.operation;
+    }
   }
 
-  createAddSubTask(definition: TaskCategory): Task {
+  private createAddTask(definition: TaskCategory): Task {
+    let ops: OrderedPair = this.getTwoRandoms(definition);
+    return {
+      operation: definition.operation,
+      operand1: ops.lower,
+      operand2: ops.higher - ops.lower,
+      result: ops.higher,
+    }
+  }
+
+  private createSubTask(definition: TaskCategory): Task {
+    let ops: OrderedPair = this.getTwoRandoms(definition);
+    return {
+      operation: definition.operation,
+      operand1: ops.higher,
+      operand2: ops.higher - ops.lower,
+      result: ops.lower,
+    }
+  }
+
+  private getTwoRandoms(definition: TaskCategory): OrderedPair {
+    let bounds: OrderedPair = {
+      lower: definition.lowerBoundary,
+      higher: definition.higherBoundary
+    };
     // generate two random numbers within this range
-    let op1: number = this.getRandomInInterval(definition.lowerBoundary, definition.higherBoundary);
-    let op2: number = this.getRandomInInterval(definition.lowerBoundary, definition.higherBoundary);
+    let op1: number = this.getRandomInInterval(bounds);
+    let op2: number = this.getRandomInInterval(bounds);
     // determine higher and lower one
-    let opLower: number = Math.min(op1, op2);
-    let opHigher: number = Math.max(op1, op2);
-    // finally, generate the resulting task
-    if (definition.operation == Operation.ADDITION) {
-      return {
-        operation: definition.operation,
-        operand1: opLower,
-        operand2: opHigher - opLower,
-        result: opHigher,
-      }
+    return {
+      lower: Math.min(op1, op2),
+      higher: Math.max(op1, op2)
     }
-    if (definition.operation == Operation.SUBTRACTION) {
-      return {
-        operation: definition.operation,
-        operand1: opHigher,
-        operand2: opHigher - opLower,
-        result: opLower,
-      }
-    }
-    throw "Unsupported operation: " + definition.operation;
   }
 
-  getRandomInInterval(lower: number, higher: number): number {
-    if (higher < lower) throw "config error: lower boundary is greater than the higher boundary";
-    let range: number = higher - lower;
-    return lower + (range * Math.random());
+  getRandomInInterval(boundary: OrderedPair): number {
+    if (boundary.higher < boundary.lower) throw "config error: lower boundary is greater than the higher boundary";
+    let range: number = boundary.higher - boundary.lower;
+    return boundary.lower + (range * Math.random());
   }
 
 }
