@@ -1,1 +1,15 @@
-<p>task works!</p>
+<div class="task">
+    <div class="exercise">
+        <span class="operand">{{task.operand1}}</span>
+        <span class="opcode">{{getOpSign(task.operation)}}</span>
+        <span class="operand">{{task.operand2}}</span>
+    </div>
+    <div class="equals">
+        <span class="opcode">=</span>
+    </div>
+    <div class="result">
+        <span class="result">
+            <input id="userInput" [(ngModel)]="userInput" placeholder="?" >
+        </span>
+    </div>
+</div>

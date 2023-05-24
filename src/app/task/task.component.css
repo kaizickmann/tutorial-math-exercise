@@ -1,0 +1,42 @@
+:host {
+    margin: 1em auto 0;
+}
+
+.task {
+    width: 100%;
+    border: 1px solid;
+    padding: 1em;
+    text-align: center;
+}
+
+.task span {
+    display: inline-block;
+    background-color: #cef;
+    margin: 1em;
+    padding: 1em 1.5em;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.opcode {
+    border-radius: 1.5em;
+}
+
+.task .equals span {
+    margin: 2em;
+}
+
+.task span.result {
+    padding: 1em;
+    width: 5em;
+}
+
+.task span input {
+    background-color: #e0f8ff;
+    border: none;
+    text-align: center;
+    padding: .5em;
+    width: 4em;
+    font-size: 1em;
+    font-weight: bold;
+}

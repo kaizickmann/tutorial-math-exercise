@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 
@@ -9,6 +10,10 @@ describe('AppComponent', () => {
         AppComponent,
         TaskComponent
       ],
+      imports: [
+        FormsModule
+      ]
+
     }).compileComponents();
   });
 
