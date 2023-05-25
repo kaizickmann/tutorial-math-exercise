@@ -4,6 +4,6 @@
     <div class="operand">{{task.operand2}}</div>
     <div class="opcode">=</div>
     <div class="result">
-        <input id="userInput" [(ngModel)]="userInput" placeholder="?" >
+        <input id="userInput" [(ngModel)]="userInput" placeholder="?" (keydown.enter)="solved()">
     </div>
 </div>
