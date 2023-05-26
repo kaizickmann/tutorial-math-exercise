@@ -28,7 +28,7 @@ export class TaskComponent {
 
   createTask(): void {
     this.task = this.taskProducerService.createTask({
-      operation: Operation.MULTIPLICATION,
+      operations: [ Operation.MULTIPLICATION ],
       lowerBoundary: 3,
       higherBoundary: 5
     });

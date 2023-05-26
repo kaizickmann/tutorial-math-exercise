@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from './domain/task';
-import { TaskCategory } from './domain/task-category';
+import { TaskRange } from './domain/task-range';
 import { Operation } from './domain/operation';
 
 interface OrderedPair {
@@ -15,41 +15,46 @@ export class TaskProducerService {
 
   constructor() { }
 
-  public createTask(definition: TaskCategory): Task {
-    switch (definition.operation) {
+  public createTask(taskRange: TaskRange): Task {
+    let op: Operation = this.getRandomOperationFrom(taskRange.operations);
+    switch (op) {
       case Operation.ADDITION:
-        return this.createAddTask(definition);
+        return this.createAddTask(taskRange);
       case Operation.SUBTRACTION:
-        return this.createSubTask(definition);
+        return this.createSubTask(taskRange);
       default:
-        throw "Unsupported operation: " + definition.operation;
+        throw "Unsupported operation: " + op;
     }
   }
 
-  private createAddTask(definition: TaskCategory): Task {
-    let ops: OrderedPair = this.getTwoRandoms(definition);
+  private getRandomOperationFrom(operations: Operation[]) {
+    return operations[Math.floor(Math.random() * operations.length)];
+  }
+
+  private createAddTask(taskRange: TaskRange): Task {
+    let ops: OrderedPair = this.getTwoRandoms(taskRange);
     return {
-      operation: definition.operation,
+      operation: Operation.ADDITION,
       operand1: ops.lower,
       operand2: ops.higher - ops.lower,
       result: ops.higher,
     }
   }
 
-  private createSubTask(definition: TaskCategory): Task {
-    let ops: OrderedPair = this.getTwoRandoms(definition);
+  private createSubTask(taskRange: TaskRange): Task {
+    let ops: OrderedPair = this.getTwoRandoms(taskRange);
     return {
-      operation: definition.operation,
+      operation: Operation.SUBTRACTION,
       operand1: ops.higher,
       operand2: ops.higher - ops.lower,
       result: ops.lower,
     }
   }
 
-  private getTwoRandoms(definition: TaskCategory): OrderedPair {
+  private getTwoRandoms(taskRange: TaskRange): OrderedPair {
     let bounds: OrderedPair = {
-      lower: definition.lowerBoundary,
-      higher: definition.higherBoundary
+      lower: taskRange.lowerBoundary,
+      higher: taskRange.higherBoundary
     };
     // generate two random numbers within this range
     let op1: number = this.getRandomInInterval(bounds);

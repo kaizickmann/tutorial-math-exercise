@@ -1,7 +1,7 @@
 import { Operation } from "./operation";
 
-export interface TaskCategory {
-    operation: Operation;
+export interface TaskRange {
+    operations: Operation[];
     lowerBoundary: number;
     higherBoundary: number;
 }
