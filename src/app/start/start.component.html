@@ -1,1 +1,35 @@
-<p>start works!</p>
+<div class="start">
+    <table>
+        <tr>
+            <td>
+                <label for="taskCount">Anzahl der Aufgaben (1-100):</label>
+            </td>
+            <td>
+                <input type="number" id="taskCount" [(ngModel)]="taskCount" min="1" max="100">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="operations">Operationen:</label>
+            </td>
+            <td>
+                <div *ngFor="let opItem of operations">
+                    <input type="checkbox" id="{{opItem.name}}" name="{{opItem.name}}" [checked]="opItem.checked" (change)="changeOpItem(opItem, $event)">
+                    <label for="{{opItem.name}}">
+                        {{opItem.name}}
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="operandMax">im Zahlenbereich bis: (5-1.000.000):</label>
+            </td>
+            <td>
+                <input type="number" id="operandMax" [(ngModel)]="operandMax" min="5" max="1000000">
+            </td>
+        </tr>
+    </table>
+
+    <button type="button" (click)="startTasks()" [disabled]="!isStartable()">Start</button>
+</div>
