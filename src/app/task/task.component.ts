@@ -1,22 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task } from '../domain/task';
 import { Operation } from '../domain/operation';
 import { Answer } from '../domain/answer';
 import { TaskProducerService } from '../task-producer.service';
+
+const ZERO_TASK : Task =  {operand1: -1, operand2: -1, operation: Operation.ADDITION, result: -2};
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
 
-  task: Task = {
-    operation: Operation.ADDITION,
-    operand1: 40,
-    operand2: 2,
-    result: 42
-  }
+  task?: Task;
 
   userInput: string = "";
 
@@ -51,7 +48,7 @@ export class TaskComponent {
       } else {
         // eigentlich Logik
           let answer: Answer = {
-            task: this.task,
+            task: this.task || ZERO_TASK,
             answer: userAnswer,
             durationMilli: 0
           }
