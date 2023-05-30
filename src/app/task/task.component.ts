@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../domain/task';
 import { Operation } from '../domain/operation';
+import { TaskRange } from '../domain/task-range';
 import { Answer } from '../domain/answer';
 import { TaskProducerService } from '../task-producer.service';
+import { MissionService } from '../mission.service';
 
-const ZERO_TASK : Task =  {operand1: -1, operand2: -1, operation: Operation.ADDITION, result: -2};
+const ZERO_TASK: Task = { operand1: -1, operand2: -1, operation: Operation.ADDITION, result: -2 };
 
 @Component({
   selector: 'app-task',
@@ -17,17 +19,27 @@ export class TaskComponent implements OnInit {
 
   userInput: string = "";
 
-  constructor(private taskProducerService: TaskProducerService) { }
+  constructor(
+    private missionService: MissionService,
+    private taskProducerService: TaskProducerService) { }
 
   ngOnInit(): void {
-    this.createTask();
+    this.task = this.createTask();
   }
 
-  createTask(): void {
-    this.task = this.taskProducerService.createTask({
-      operations: [ Operation.MULTIPLICATION ],
-      lowerBoundary: 3,
-      higherBoundary: 5
+  createTask(): Task {
+    // assure, that the mission is available
+    if (!this.missionService.mission) {
+      // perhaps, the user invoked "/task" directly...
+      this.missionService.restart();
+      return ZERO_TASK;
+    }
+
+    let taskRange: TaskRange = this.missionService.mission?.taskRange;
+    return this.taskProducerService.createTask({
+      operations: taskRange.operations,
+      lowerBoundary: taskRange.lowerBoundary,
+      higherBoundary: taskRange.higherBoundary
     });
   }
 
@@ -47,12 +59,12 @@ export class TaskComponent implements OnInit {
         alert("Das kann ich nicht als Zahl erkennen: " + this.userInput);
       } else {
         // eigentlich Logik
-          let answer: Answer = {
-            task: this.task || ZERO_TASK,
-            answer: userAnswer,
-            durationMilli: 0
-          }
-          // TODO: answer weitergeben
+        let answer: Answer = {
+          task: this.task || ZERO_TASK,
+          answer: userAnswer,
+          durationMilli: 0
+        }
+        // TODO: answer weitergeben
       }
     }
   }

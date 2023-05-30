@@ -12,6 +12,11 @@ export class MissionService {
 
   constructor(private router: Router) { }
 
+  restart() {
+    this.mission = undefined;
+    this.router.navigate(['/start']);
+  }
+
   start(taskCount: number, operations: Operation[], operandMax: number): void {
     this.mission = {
       taskCount: taskCount,
@@ -25,4 +30,5 @@ export class MissionService {
     // TODO: result page?
     this.router.navigate(['/task']);
   }
+
 }
