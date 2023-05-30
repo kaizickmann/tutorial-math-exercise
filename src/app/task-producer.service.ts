@@ -3,10 +3,8 @@ import { Task } from './domain/task';
 import { TaskRange } from './domain/task-range';
 import { Operation } from './domain/operation';
 
-interface OrderedPair {
-  lower: number;
-  higher: number;
-}
+type Pair = { n1: number, n2: number };
+type OrderedPair = { lower: number, higher: number };
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +20,10 @@ export class TaskProducerService {
         return this.createAddTask(taskRange);
       case Operation.SUBTRACTION:
         return this.createSubTask(taskRange);
-      default:
-        throw "Unsupported operation: " + op;
+      case Operation.MULTIPLICATION:
+        return this.createMultTask(taskRange);
+      case Operation.DIVISION:
+        return this.createDivTask(taskRange);
     }
   }
 
@@ -32,7 +32,7 @@ export class TaskProducerService {
   }
 
   private createAddTask(taskRange: TaskRange): Task {
-    let ops: OrderedPair = this.getTwoRandoms(taskRange);
+    let ops: OrderedPair = this.getTwoOrderedRandoms(taskRange);
     return {
       operation: Operation.ADDITION,
       operand1: ops.lower,
@@ -42,7 +42,7 @@ export class TaskProducerService {
   }
 
   private createSubTask(taskRange: TaskRange): Task {
-    let ops: OrderedPair = this.getTwoRandoms(taskRange);
+    let ops: OrderedPair = this.getTwoOrderedRandoms(taskRange);
     return {
       operation: Operation.SUBTRACTION,
       operand1: ops.higher,
@@ -51,18 +51,45 @@ export class TaskProducerService {
     }
   }
 
-  private getTwoRandoms(taskRange: TaskRange): OrderedPair {
+  private createMultTask(taskRange: TaskRange): Task {
+    let ops: Pair = this.getTwoRandoms(taskRange);
+    return {
+      operation: Operation.MULTIPLICATION,
+      operand1: ops.n1,
+      operand2: ops.n2,
+      result: ops.n1 * ops.n2,
+    }
+  }
+
+  private createDivTask(taskRange: TaskRange): Task {
+    let ops: Pair = this.getTwoRandoms(taskRange);
+    return {
+      operation: Operation.DIVISION,
+      operand1: ops.n1 * ops.n2,
+      operand2: ops.n2,
+      result: ops.n1,
+    }
+  }
+
+  private getTwoOrderedRandoms(taskRange: TaskRange): OrderedPair {
+    // generate two random numbers
+    let op: Pair = this.getTwoRandoms(taskRange);
+    // determine higher and lower one
+    return {
+      lower: Math.min(op.n1, op.n2),
+      higher: Math.max(op.n1, op.n2)
+    }
+  }
+
+  private getTwoRandoms(taskRange: TaskRange): Pair {
     let bounds: OrderedPair = {
       lower: taskRange.lowerBoundary,
       higher: taskRange.higherBoundary
     };
     // generate two random numbers within this range
-    let op1: number = this.getRandomInInterval(bounds);
-    let op2: number = this.getRandomInInterval(bounds);
-    // determine higher and lower one
     return {
-      lower: Math.min(op1, op2),
-      higher: Math.max(op1, op2)
+      n1: this.getRandomInInterval(bounds),
+      n2: this.getRandomInInterval(bounds)
     }
   }
 
