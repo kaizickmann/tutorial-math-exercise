@@ -69,7 +69,7 @@ export class TaskProducerService {
   getRandomInInterval(boundary: OrderedPair): number {
     if (boundary.higher < boundary.lower) throw "config error: lower boundary is greater than the higher boundary";
     let range: number = boundary.higher - boundary.lower;
-    return boundary.lower + (range * Math.random());
+    return Math.round(boundary.lower + (range * Math.random()));
   }
 
 }
