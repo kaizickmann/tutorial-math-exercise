@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Operation } from '../domain/operation';
+import { MissionService } from '../mission.service';
 
 @Component({
   selector: 'app-start',
@@ -17,6 +19,8 @@ export class StartComponent {
   taskCount: number = 10;
   operandMax: number = 20;
 
+  constructor(private mission: MissionService, private router: Router) { };
+
   changeOpItem(opItem: any, event: any): void {
     opItem.checked = event.target.checked;
   }
@@ -30,16 +34,10 @@ export class StartComponent {
   }
 
   startTasks(): void {
-
-
-    for (let selectedName of this.operations.filter(item => item.checked).map(item => item.name)) {
-      alert(selectedName);
-    }
-    alert("Anzahl der Aufgaben: " + this.taskCount);
-    alert("maxOperator: " + this.operandMax);
-
-
-
+    this.mission.start(
+      this.taskCount,
+      this.getSelectedOperations(),
+      this.operandMax);
   }
 
 }
