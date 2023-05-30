@@ -24,6 +24,11 @@ export class TaskComponent implements OnInit {
     private taskProducerService: TaskProducerService) { }
 
   ngOnInit(): void {
+    this.resetComponent();
+  }
+
+  resetComponent(): void {
+    this.userInput = "";
     this.task = this.createTask();
   }
 
@@ -64,7 +69,9 @@ export class TaskComponent implements OnInit {
           answer: userAnswer,
           durationMilli: 0
         }
-        // TODO: answer weitergeben
+        this.missionService.solved(answer);
+        this.resetComponent();
+        this.missionService.nextPage();
       }
     }
   }

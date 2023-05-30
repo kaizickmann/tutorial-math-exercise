@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Mission } from './domain/mission';
 import { Operation } from './domain/operation';
+import { Answer } from './domain/answer';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class MissionService {
       answers: []
     };
     this.nextPage();
+  }
+
+  solved(answer: Answer) {
+    this.mission?.answers.push(answer);
   }
 
   nextPage(): void {
