@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Operation } from '../domain/operation';
-import { MissionService } from '../mission.service';
+import { LifecycleService } from '../lifecycle.service';
 
 @Component({
   selector: 'app-start',
@@ -19,7 +19,7 @@ export class StartComponent {
   taskCount: number = 10;
   operandMax: number = 20;
 
-  constructor(private mission: MissionService, private router: Router) { };
+  constructor(private lifecycleService: LifecycleService, private router: Router) { };
 
   changeOpItem(opItem: any, event: any): void {
     opItem.checked = event.target.checked;
@@ -34,7 +34,7 @@ export class StartComponent {
   }
 
   startTasks(): void {
-    this.mission.start(
+    this.lifecycleService.start(
       this.taskCount,
       this.getSelectedOperations(),
       this.operandMax);

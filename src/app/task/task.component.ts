@@ -4,7 +4,7 @@ import { Operation } from '../domain/operation';
 import { TaskRange } from '../domain/task-range';
 import { Answer } from '../domain/answer';
 import { TaskProducerService } from '../task-producer.service';
-import { MissionService } from '../mission.service';
+import { LifecycleService } from '../lifecycle.service';
 
 const ZERO_TASK: Task = { operand1: -1, operand2: -1, operation: Operation.ADDITION, result: -2 };
 
@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit {
   userInput: string = "";
 
   constructor(
-    private missionService: MissionService,
+    private lifecycleService: LifecycleService,
     private taskProducerService: TaskProducerService) { }
 
   ngOnInit(): void {
@@ -34,13 +34,13 @@ export class TaskComponent implements OnInit {
 
   createTask(): Task {
     // assure, that the mission is available
-    if (!this.missionService.mission) {
+    if (!this.lifecycleService.mission) {
       // perhaps, the user invoked "/task" directly...
-      this.missionService.restart();
+      this.lifecycleService.restart();
       return ZERO_TASK;
     }
 
-    let taskRange: TaskRange = this.missionService.mission?.taskRange;
+    let taskRange: TaskRange = this.lifecycleService.mission?.taskRange;
     return this.taskProducerService.createTask({
       operations: taskRange.operations,
       lowerBoundary: taskRange.lowerBoundary,
@@ -69,9 +69,9 @@ export class TaskComponent implements OnInit {
           answer: userAnswer,
           durationMilli: 0
         }
-        this.missionService.solved(answer);
+        this.lifecycleService.solved(answer);
         this.resetComponent();
-        this.missionService.nextPage();
+        this.lifecycleService.nextPage();
       }
     }
   }

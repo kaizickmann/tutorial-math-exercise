@@ -7,7 +7,7 @@ import { Answer } from './domain/answer';
 @Injectable({
   providedIn: 'root'
 })
-export class MissionService {
+export class LifecycleService {
 
   mission?: Mission;
 
