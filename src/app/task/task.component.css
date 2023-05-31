@@ -15,7 +15,9 @@
     display: inline-block;
     background-color: #cef;
     margin: 1em;
-    padding: 1em 1.5em;
+    padding: .75em .5em;
+    width: 2em;
+    height: 1.5em;
     font-weight: bold;
     font-size: 2em;
 }
@@ -25,7 +27,7 @@
 }
 
 .task div.result {
-    padding: .5em 1em;
+    padding: .75em 1em;
     width: 4em;
 }
 
@@ -33,8 +35,9 @@
     background-color: #e0f8ff;
     border: none;
     text-align: center;
-    padding: .5em;
+    padding: 0;
     width: 3em;
+    height: 1.5em;
     font-size: 1em;
     font-weight: bold;
 }
