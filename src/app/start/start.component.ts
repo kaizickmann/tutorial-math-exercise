@@ -19,7 +19,7 @@ export class StartComponent {
   taskCount: number = 10;
   operandMax: number = 20;
 
-  constructor(private lifecycleService: LifecycleService, private router: Router) { };
+  constructor(private lifecycleService: LifecycleService) { };
 
   changeOpItem(opItem: any, event: any): void {
     opItem.checked = event.target.checked;
