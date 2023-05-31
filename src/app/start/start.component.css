@@ -1,0 +1,49 @@
+:host {
+    margin: 1em auto 0;
+}
+
+.start {
+    border: 1px solid;
+    padding: 1em;
+    text-align: left;
+    justify-content: center;
+    font-size: 2em;
+}
+
+td {
+    padding: .5em 0;
+}
+
+td:first-child {
+    vertical-align: top;
+    padding-right: .5em;
+}
+
+input {
+    background-color: #e0f8ff;
+    border: none;
+    text-align: center;
+    padding: 0;
+    width: 3em;
+    height: 2em;
+    font-size: 1em;
+    font-weight: bold;
+}
+input[type="checkbox"] {
+    margin-left: -.4em;
+}
+
+.buttonBar {
+    text-align: right;
+    margin-top: 2em;
+}
+
+.buttonBar button {
+    background-color: #8ce;
+    padding: 1em 2em;
+    font-size: .75em;
+}
+
+.buttonBar button:hover {
+    background-color: #cef;
+}
