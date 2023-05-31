@@ -1,1 +1,29 @@
-<p>result works!</p>
+<div class="result" *ngIf="content()">
+    <div class="headline">Ergebnisse</div>
+    <table>
+        <thead>
+            <tr>
+                <td class="task">Aufgabe</td>
+                <td class="answer">Antwort</td>
+                <td class="feedback">Korrektur</td>
+                <td class="time">Zeit</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let answer of answers()">
+                <td>{{answer.task.operand1}} {{answer.task.operation}} {{answer.task.operand2}} </td>
+                <td [class]="styleFor(answer)">= {{answer.answer}}</td>
+                <td [class]="styleFor(answer)">
+                    <div *ngIf="isCorrect(answer);then correctAnswer else wrongAnswer">here is ignored</div>
+                    <ng-template #correctAnswer>richtig</ng-template>
+                    <ng-template #wrongAnswer>falsch: {{answer.task.result}}</ng-template>
+                </td>
+                <td>{{answer.durationMilli/1000}}s</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="buttonBar">
+        <button type="button" [routerLink]="['/start']">Noch einmal >>></button>
+    </div>
+</div>

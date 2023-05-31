@@ -1,0 +1,47 @@
+:host {
+    margin: 1em auto 0;
+}
+
+.result {
+    border: 1px solid;
+    padding: 1em;
+    text-align: center;
+    font-size: 2em;
+}
+
+.headline {
+    font-size: 1.5em;
+    padding: 1em 0;
+}
+
+thead td {
+    background-color: #cef;
+    padding: .5em 1em;
+}
+
+td.correct {
+    color: green;
+}
+
+td.wrong {
+    color: red;
+}
+
+tr:nth-child(2n) {
+    background-color: #eee;
+}
+
+.buttonBar {
+    text-align: right;
+    margin-top: 2em;
+}
+
+.buttonBar button {
+    background-color: #8ce;
+    padding: 1em 2em;
+    font-size: .75em;
+}
+
+.buttonBar button:hover {
+    background-color: #cef;
+}
