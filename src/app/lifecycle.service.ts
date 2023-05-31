@@ -32,8 +32,13 @@ export class LifecycleService {
   }
 
   nextPage(): void {
-    // TODO: result page?
-    this.router.navigate(['/task']);
+    if (this.mission) {
+      if (this.mission.taskCount > this.mission.answers.length) {
+        this.router.navigate(['/task']);
+      } else {
+        this.router.navigate(['/result']);
+      }
+    }
   }
 
 }
