@@ -48,15 +48,6 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  getOpSign(operation: Operation): string {
-    switch (operation) {
-      case Operation.ADDITION: return "+";
-      case Operation.SUBTRACTION: return "-";
-      case Operation.MULTIPLICATION: return "•";
-      case Operation.DIVISION: return ":";
-    }
-  }
-
   solved(): void {
     if (this.userInput) {
       let userAnswer: number = Number(this.userInput);
