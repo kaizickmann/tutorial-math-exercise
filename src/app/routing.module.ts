@@ -5,10 +5,10 @@ import { TaskComponent } from './task/task.component';
 import { ResultComponent } from './result/result.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/start', pathMatch: 'full' },
   { path: 'start', component: StartComponent },
   { path: 'task', component: TaskComponent },
-  { path: 'result', component: ResultComponent }
+  { path: 'result', component: ResultComponent },
+  { path: '**', redirectTo: '/start', pathMatch: 'full' },
 ];
 
 @NgModule({
