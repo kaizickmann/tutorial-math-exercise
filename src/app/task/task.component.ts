@@ -16,8 +16,8 @@ const ZERO_TASK: Task = { operand1: -1, operand2: -1, operation: Operation.ADDIT
 export class TaskComponent implements OnInit {
 
   task?: Task;
-
   userInput: string = "";
+  startStamp: Date = new Date();
 
   constructor(
     private lifecycleService: LifecycleService,
@@ -30,6 +30,7 @@ export class TaskComponent implements OnInit {
   resetComponent(): void {
     this.userInput = "";
     this.task = this.createTask();
+    this.startStamp = new Date();
   }
 
   createTask(): Task {
@@ -49,6 +50,7 @@ export class TaskComponent implements OnInit {
   }
 
   solved(): void {
+    let stopStamp = new Date();
     if (this.userInput) {
       let userAnswer: number = Number(this.userInput);
       if (isNaN(userAnswer)) {
@@ -58,7 +60,7 @@ export class TaskComponent implements OnInit {
         let answer: Answer = {
           task: this.task || ZERO_TASK,
           answer: userAnswer,
-          durationMilli: 0
+          duration: Math.round((stopStamp.getTime() - this.startStamp.getTime())/1000)
         }
         this.lifecycleService.solved(answer);
         this.resetComponent();
