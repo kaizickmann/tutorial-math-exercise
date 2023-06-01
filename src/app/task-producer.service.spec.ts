@@ -38,7 +38,7 @@ describe('TaskProducerService', () => {
 
   it('should create add task 5+0', () => {
     expect(service.createTask({
-      operation: Operation.ADDITION,
+      operations: [Operation.ADDITION],
       lowerBoundary: 5,
       higherBoundary: 5
     })).toEqual({
@@ -51,7 +51,7 @@ describe('TaskProducerService', () => {
 
   it('should create sub task 5-0', () => {
     expect(service.createTask({
-      operation: Operation.SUBTRACTION,
+      operations: [Operation.SUBTRACTION],
       lowerBoundary: 5,
       higherBoundary: 5
     })).toEqual({
