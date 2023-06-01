@@ -1,7 +1,9 @@
 import { TestBed } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
+import { RoutingModule } from './routing.module';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -11,9 +13,10 @@ describe('AppComponent', () => {
         TaskComponent
       ],
       imports: [
-        FormsModule
-      ]
-
+        BrowserModule,
+        FormsModule,
+        RoutingModule
+      ],
     }).compileComponents();
   });
 

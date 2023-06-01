@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Operation } from '../domain/operation';
 import { LifecycleService } from '../lifecycle.service';
 
