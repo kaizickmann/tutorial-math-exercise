@@ -43,11 +43,7 @@ export class LifecycleService {
 
   solveTask(task: Task, userAnswer: number): void {
     let duration = Math.round((Date.now() - task.startedAt) / 1000)
-    let answer: Answer = {
-      task: task,
-      answer: userAnswer,
-      duration: duration,
-    }
+    let answer: Answer = new Answer(task, userAnswer, duration);
     this.mission?.answers.push(answer);
     this.nextPage();
   }
