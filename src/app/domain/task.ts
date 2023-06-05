@@ -5,4 +5,5 @@ export interface Task {
     operand1: number;
     operand2: number;
     result: number;
+    startedAt: Date;
 }
