@@ -42,8 +42,7 @@ export class LifecycleService {
   }
 
   solveTask(task: Task, userAnswer: number): void {
-    let anseredAt = new Date();
-    let duration = Math.round((anseredAt.getTime() - task.startedAt.getTime()) / 1000)
+    let duration = Math.round((Date.now() - task.startedAt) / 1000)
     let answer: Answer = {
       task: task,
       answer: userAnswer,

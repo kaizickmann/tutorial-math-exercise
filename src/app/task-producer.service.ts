@@ -38,7 +38,7 @@ export class TaskProducerService {
       operand1: ops.lower,
       operand2: ops.higher - ops.lower,
       result: ops.higher,
-      startedAt: new Date(),
+      startedAt: Date.now(),
     }
   }
 
@@ -49,7 +49,7 @@ export class TaskProducerService {
       operand1: ops.higher,
       operand2: ops.higher - ops.lower,
       result: ops.lower,
-      startedAt: new Date(),
+      startedAt: Date.now(),
     }
   }
 
@@ -60,7 +60,7 @@ export class TaskProducerService {
       operand1: ops.n1,
       operand2: ops.n2,
       result: ops.n1 * ops.n2,
-      startedAt: new Date(),
+      startedAt: Date.now(),
     }
   }
 
@@ -71,7 +71,7 @@ export class TaskProducerService {
       operand1: ops.n1 * ops.n2,
       operand2: ops.n2,
       result: ops.n1,
-      startedAt: new Date(),
+      startedAt: Date.now(),
     }
   }
 

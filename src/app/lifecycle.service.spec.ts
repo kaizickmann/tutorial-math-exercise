@@ -52,7 +52,7 @@ describe('LifecycleService', () => {
       operand2: count,
       result: count * count,
       operation: Operation.MULTIPLICATION,
-      startedAt: new Date(),
+      startedAt: Date.now(),
     };
   }
 
@@ -76,6 +76,28 @@ describe('LifecycleService', () => {
     expect(actualTaskRange?.lowerBoundary).toEqual(0);
     expect(actualTaskRange?.higherBoundary).toEqual(5);
     expect(actualTaskRange?.operations).toBe(myOperations);
+  });
+
+  it('should calculate the duration', () => {
+    let timeSpy = spyOn(Date, 'now');
+
+    // test with exactly 42 seconds
+    timeSpy.and.returnValues(500, 42500);
+    startServiceWithTestFixture();
+    service.solveTask(mockMultTask(1), 1);
+    expect(service.mission?.answers[0]?.duration).toEqual(42);
+
+    // test rounding down
+    timeSpy.and.returnValues(500, 7999);
+    startServiceWithTestFixture();
+    service.solveTask(mockMultTask(1), 1);
+    expect(service.mission?.answers[0]?.duration).toEqual(7);
+
+    // test rounding up
+    timeSpy.and.returnValues(500, 7001);
+    startServiceWithTestFixture();
+    service.solveTask(mockMultTask(1), 1);
+    expect(service.mission?.answers[0]?.duration).toEqual(7);
   });
 
   it('should solve two tasks', () => {
