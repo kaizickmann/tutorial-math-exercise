@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { LifecycleService } from './lifecycle.service';
 import { Router } from '@angular/router';
 import { Operation } from './domain/operation';
-import { Answer } from './domain/answer';
+import { TaskProducerService } from './task-producer.service';
 
 describe('LifecycleService', () => {
   let service: LifecycleService;
@@ -55,6 +55,37 @@ describe('LifecycleService', () => {
       startedAt: Date.now(),
     };
   }
+
+  it('should generate the next task', () => {
+    // suitable setup
+    startServiceWithTestFixture();
+
+    // mock the task producer service (which is tested separate)
+    let expectedTask = mockMultTask(42);
+    let producerSpy = spyOn(TestBed.inject(TaskProducerService), 'createTask')
+      .and.returnValue(expectedTask);
+    // according task should be generated
+    let actualTask = service.getNextTask();
+    expect(actualTask).toBeDefined();
+    expect(actualTask).toBe(expectedTask);
+
+    // also, expect the TaskRange parameter (which requires a little bit preparation)
+    let currentMission = service.mission;
+    if (!currentMission) throw "Where is the mission?";
+    expect(producerSpy).toHaveBeenCalledOnceWith(currentMission.taskRange);
+  });
+
+  it('should NOT generate a task without being started', () => {
+    service.mission = undefined;
+    let producerSpy = spyOn(TestBed.inject(TaskProducerService), 'createTask').and.callThrough();
+
+    // this should not work
+    let actualTask = service.getNextTask();
+    expect(routerSpy).toHaveBeenCalledOnceWith(['/start']);
+    expect(service.mission).toBeUndefined();
+    expect(actualTask).toBeUndefined();
+    expect(producerSpy).not.toHaveBeenCalled();
+  });
 
   it('should solve a task', () => {
     const myOperations = startServiceWithTestFixture();
