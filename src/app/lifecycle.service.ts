@@ -23,11 +23,8 @@ export class LifecycleService {
   }
 
   start(taskCount: number, operations: Operation[], operandMax: number): void {
-    this.mission = {
-      taskCount: taskCount,
-      taskRange: { higherBoundary: operandMax, lowerBoundary: 0, operations: operations },
-      answers: []
-    };
+    const taskRange = { higherBoundary: operandMax, lowerBoundary: 0, operations: operations };
+    this.mission = new Mission(taskCount, taskRange);
     this.nextPage();
   }
 
