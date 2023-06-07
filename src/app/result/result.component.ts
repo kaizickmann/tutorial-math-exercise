@@ -25,7 +25,7 @@ export class ResultComponent {
   }
 
   public isCorrect(answer: Answer): boolean {
-    return answer.answer == answer.task.result;
+    return answer.isCorrect();
   }
 
 }

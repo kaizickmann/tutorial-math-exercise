@@ -82,72 +82,52 @@ describe('TaskProducerService', () => {
       .toEqual(Operation.ADDITION);
   });
 
+  function callServiceToCreateAllOperationTaskBetween0And100() {
+    return service.createTask({
+      operations: ALL_OPS,
+      lowerBoundary: 0,
+      higherBoundary: 100
+    });
+  }
+
   it('should create task 40+2', () => {
     // mock the random: first operation, 42 (=result), 40
     spyOn(Math, 'random').and.returnValues(0.1, 0.42, 0.4);
-    expect(
-      service.createTask({
-        operations: ALL_OPS,
-        lowerBoundary: 0,
-        higherBoundary: 100
-      })
-    ).toEqual({
-      operation: Operation.ADDITION,
-      operand1: 40,
-      operand2: 2,
-      result: 42
-    });
+    let actual = callServiceToCreateAllOperationTaskBetween0And100();
+    expect(actual.operation).toEqual(Operation.ADDITION);
+    expect(actual.operand1).toEqual(40);
+    expect(actual.operand2).toEqual(2);
+    expect(actual.result).toEqual(42);
   });
 
   it('should create task 22-9', () => {
     // mock the random: second operation, 22, 13 (=result)
     spyOn(Math, 'random').and.returnValues(0.4, 0.22, 0.13);
-    expect(
-      service.createTask({
-        operations: ALL_OPS,
-        lowerBoundary: 0,
-        higherBoundary: 100
-      })
-    ).toEqual({
-      operation: Operation.SUBTRACTION,
-      operand1: 22,
-      operand2: 9,
-      result: 13
-    });
+    let actual = callServiceToCreateAllOperationTaskBetween0And100();
+    expect(actual.operation).toEqual(Operation.SUBTRACTION);
+    expect(actual.operand1).toEqual(22);
+    expect(actual.operand2).toEqual(9);
+    expect(actual.result).toEqual(13);
   });
 
   it('should create task 15*8', () => {
     // mock the random: third operation, 15, 8
     spyOn(Math, 'random').and.returnValues(0.7, 0.15, 0.08);
-    expect(
-      service.createTask({
-        operations: ALL_OPS,
-        lowerBoundary: 0,
-        higherBoundary: 100
-      })
-    ).toEqual({
-      operation: Operation.MULTIPLICATION,
-      operand1: 15,
-      operand2: 8,
-      result: 120
-    });
+    let actual = callServiceToCreateAllOperationTaskBetween0And100();
+    expect(actual.operation).toEqual(Operation.MULTIPLICATION);
+    expect(actual.operand1).toEqual(15);
+    expect(actual.operand2).toEqual(8);
+    expect(actual.result).toEqual(120);
   });
 
   it('should create task 666:9', () => {
     // mock the random: fourth operation, 74 (=result),  9
     spyOn(Math, 'random').and.returnValues(0.9, 0.74, 0.09);
-    expect(
-      service.createTask({
-        operations: ALL_OPS,
-        lowerBoundary: 0,
-        higherBoundary: 100
-      })
-    ).toEqual({
-      operation: Operation.DIVISION,
-      operand1: 666,
-      operand2: 9,
-      result: 74
-    });
+    let actual = callServiceToCreateAllOperationTaskBetween0And100();
+    expect(actual.operation).toEqual(Operation.DIVISION);
+    expect(actual.operand1).toEqual(666);
+    expect(actual.operand2).toEqual(9);
+    expect(actual.result).toEqual(74);
   });
 
 });

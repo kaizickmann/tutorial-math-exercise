@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../domain/task';
-import { Operation } from '../domain/operation';
-import { TaskRange } from '../domain/task-range';
 import { Answer } from '../domain/answer';
-import { TaskProducerService } from '../task-producer.service';
 import { LifecycleService } from '../lifecycle.service';
-
-const ZERO_TASK: Task = { operand1: -1, operand2: -1, operation: Operation.ADDITION, result: -2 };
 
 @Component({
   selector: 'app-task',
@@ -17,11 +12,8 @@ export class TaskComponent implements OnInit {
 
   task?: Task;
   userInput: string = "";
-  startStamp: Date = new Date();
 
-  constructor(
-    private lifecycleService: LifecycleService,
-    private taskProducerService: TaskProducerService) { }
+  constructor(private lifecycleService: LifecycleService) { }
 
   ngOnInit(): void {
     this.resetComponent();
@@ -29,43 +21,24 @@ export class TaskComponent implements OnInit {
 
   resetComponent(): void {
     this.userInput = "";
-    this.task = this.createTask();
-    this.startStamp = new Date();
-  }
-
-  createTask(): Task {
-    // assure, that the mission is available
-    if (!this.lifecycleService.mission) {
-      // perhaps, the user invoked "/task" directly...
-      this.lifecycleService.restart();
-      return ZERO_TASK;
-    }
-
-    let taskRange: TaskRange = this.lifecycleService.mission?.taskRange;
-    return this.taskProducerService.createTask({
-      operations: taskRange.operations,
-      lowerBoundary: taskRange.lowerBoundary,
-      higherBoundary: taskRange.higherBoundary
-    });
+    this.task = this.lifecycleService.getNextTask();
   }
 
   solved(): void {
-    let stopStamp = new Date();
     if (this.userInput) {
       let userAnswer: number = Number(this.userInput);
       if (isNaN(userAnswer)) {
         alert("Das kann ich nicht als Zahl erkennen: " + this.userInput);
-      } else {
-        // eigentlich Logik
-        let answer: Answer = {
-          task: this.task || ZERO_TASK,
-          answer: userAnswer,
-          duration: Math.round((stopStamp.getTime() - this.startStamp.getTime())/1000)
-        }
-        this.lifecycleService.solved(answer);
-        this.resetComponent();
-        this.lifecycleService.nextPage();
+        return;
       }
+      if (!this.task) {
+        // this should never occure (just a theoretical option)
+        this.resetComponent();
+        throw Error("Missing the answered task!");
+      }
+      // here, we go...
+      this.lifecycleService.solveTask(this.task, userAnswer);
+      this.resetComponent();
     }
   }
 }
