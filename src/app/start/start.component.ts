@@ -15,8 +15,8 @@ export class StartComponent {
     { "checked": false, "value": Operation.MULTIPLICATION, "name": "mal - Multiplikation" },
     { "checked": false, "value": Operation.DIVISION, "name": "durch - Division" },
   ]
-  taskCount: number = 10;
-  operandMax: number = 20;
+  taskCount: number = 5;
+  operandMax: number = 10;
 
   constructor(private lifecycleService: LifecycleService) { };
 
