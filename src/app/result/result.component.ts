@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Mission } from '../domain/mission';
+import { Summary } from "../domain/summary";
 import { LifecycleService } from '../lifecycle.service';
 import { Answer } from '../domain/answer';
 
@@ -20,12 +21,16 @@ export class ResultComponent {
     return this.content()?.answers || [];
   }
 
-  public styleFor(answer: Answer) : string{
+  public styleFor(answer: Answer): string {
     return this.isCorrect(answer) ? "correct" : "wrong";
   }
 
   public isCorrect(answer: Answer): boolean {
     return answer.isCorrect();
+  }
+
+  public getSummary(): Summary | undefined {
+    return this.content()?.getSummary();
   }
 
 }

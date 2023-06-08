@@ -1,5 +1,10 @@
 <div class="result" *ngIf="content()">
     <div class="headline">Ergebnisse</div>
+    <div class="summary" *ngIf="getSummary() as summary">
+        <div>Σ {{summary.count}} Fragen:</div>
+        <div>{{summary.totalDuration *1000| date:'mm:ss'}} s</div>
+        <div style="font-weight: bold;">{{summary.percentage}} %</div>
+    </div>
     <table>
         <thead>
             <tr>

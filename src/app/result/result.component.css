@@ -9,6 +9,22 @@
     font-size: 2em;
 }
 
+.summary {
+    border: 1px solid;
+    background-color: #8ce;
+    margin: 1em 0;
+    padding: .5em 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.summary div {
+    display: inline-block;
+    padding: 0 1em;
+    height: 1.5em;
+}
+
 .headline {
     font-size: 1.5em;
     padding: 1em 0;
