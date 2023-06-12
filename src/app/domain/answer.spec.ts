@@ -11,15 +11,15 @@ describe('Answer', () => {
   function createAddTask(op1: number, op2: number) {
     return {
       operand1: op1,
-      operand2: op1,
-      result: op1+op2,
+      operand2: op2,
+      result: op1 + op2,
       operation: Operation.ADDITION,
       startedAt: Date.now(),
     };
   }
 
   it('should be created', () => {
-    const myTask = createAddTask(1,1);
+    const myTask = createAddTask(1, 1);
     let actual = new Answer(myTask, 2, 42);
 
     expect(actual.task).toBe(myTask);
@@ -28,9 +28,9 @@ describe('Answer', () => {
   });
 
   it('should check correctness', () => {
-    const myTask1 = createAddTask(1,0);
-    const myTask2 = createAddTask(1,1);
-    const myTask37 = createAddTask(22,15);
+    const myTask1 = createAddTask(1, 0);
+    const myTask2 = createAddTask(1, 1);
+    const myTask37 = createAddTask(22, 15);
 
     expect(new Answer(myTask1, 0, 100).isCorrect()).toBeFalse();
     expect(new Answer(myTask1, 1, 100).isCorrect()).toBeTrue();
