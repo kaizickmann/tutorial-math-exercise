@@ -1,8 +1,8 @@
 <div class="task" *ngIf="task">
-    <div class="operand">{{task.operand1}}</div>
-    <div class="opcode">{{task.operation}}</div>
-    <div class="operand">{{task.operand2}}</div>
-    <div class="opcode">=</div>
+    <div class="operand one">{{task.operand1}}</div>
+    <div class="opcode operation">{{task.operation}}</div>
+    <div class="operand two">{{task.operand2}}</div>
+    <div class="opcode comp">=</div>
     <div class="result">
         <input id="userInput" [(ngModel)]="userInput" placeholder="?" (keydown.enter)="solved()">
     </div>

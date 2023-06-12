@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../domain/task';
-import { Answer } from '../domain/answer';
 import { LifecycleService } from '../lifecycle.service';
 
 @Component({
