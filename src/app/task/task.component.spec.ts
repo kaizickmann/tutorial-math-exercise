@@ -146,4 +146,23 @@ describe('TaskComponent', () => {
     expect(setup.resetSpy).toHaveBeenCalledOnceWith();
   });
 
+  it('should fail if the task is lost', () => {
+    // common test setup for all solve-tests
+    let setup = setupSolveTest();
+
+    const input: HTMLInputElement = findElement("input") as HTMLInputElement;
+    // input "42"
+    input.value = "42";
+    input.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    // unset the task
+    component.task = undefined;
+    // TODO: simulate the enter keypress...
+
+    expect(() => component.solved()).toThrowError("Missing the answered task!");
+    expect(setup.resetSpy).toHaveBeenCalledOnceWith();
+    expect(setup.alertSpy).not.toHaveBeenCalled();
+    expect(setup.serviceSpy).not.toHaveBeenCalled();
+  });
+
 });
