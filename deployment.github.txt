@@ -1,0 +1,37 @@
+
+# Create Github repository
+
+https://github.com/kaizickmann/tutorial-math-exercise.git
+
+
+# Install Angular CLI gh-pages
+
+npm i angular-cli-ghpages --save-dev
+
+
+# Run build
+
+npm run build:github
+
+// ng build --configuration production --base-href "https://kaizickmann.github.io/tutorial-math-exercise/"
+// ng build --prod                     --base-href "https://GithubUserName.github.io/GithubRepoName/"
+
+
+# Deploy to gh-pages
+
+npx angular-cli-ghpages --dir=dist/math-exercise
+
+
+# Visit
+
+https://kaizickmann.github.io/tutorial-math-exercise/
+
+
+
+=== WORKAROUND ===
+
+rm -rf dist/
+npm run build:github
+
+rm -rf docs/
+cp -r dist/math-exercise docs/
