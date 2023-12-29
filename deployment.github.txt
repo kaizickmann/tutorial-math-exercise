@@ -25,3 +25,15 @@ npx angular-cli-ghpages --dir=dist/math-exercise
 # Visit
 
 https://kaizickmann.github.io/tutorial-math-exercise/
+
+
+
+
+
+=== WORKAROUND ===
+
+rm -rf dist/
+npm run build:github
+
+rm -rf docs/
+cp -r dist/math-exercise docs/
