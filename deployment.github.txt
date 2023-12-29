@@ -28,8 +28,6 @@ https://kaizickmann.github.io/tutorial-math-exercise/
 
 
 
-
-
 === WORKAROUND ===
 
 rm -rf dist/
