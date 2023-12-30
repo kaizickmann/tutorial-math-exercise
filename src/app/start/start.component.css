@@ -19,18 +19,28 @@ td:first-child {
     padding-right: .5em;
 }
 
-input {
+input, button.operation {
     background-color: #e0f8ff;
     border: none;
     text-align: center;
-    padding: 0;
-    width: 3em;
     height: 2em;
     font-size: 1em;
     font-weight: bold;
 }
-input[type="checkbox"] {
-    margin-left: -.4em;
+input {
+  padding: 0;
+  width: 3em;
+}
+button.operation {
+  width: 4em;
+  margin-bottom: .5em;
+}
+button.operation.true {
+  background-color: #8ce;
+}
+button.operation.false {
+  background-color: #e0f8ff;
+  color: grey;
 }
 
 .buttonBar {

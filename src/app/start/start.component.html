@@ -1,31 +1,29 @@
-<div class="start">
-    <table>
-        <tr>
-            <td>Anzahl der Aufgaben:</td>
-            <td>
-                <input type="number" id="taskCount" [(ngModel)]="taskCount" min="1" max="100" title="1 - 100">
-            </td>
-        </tr>
-        <tr>
-            <td>Operationen:</td>
-            <td style="text-align-last: justify;">
-                <div *ngFor="let opItem of operations">
-                    {{opItem.name}}
-                    <input type="checkbox" name="{{opItem.name}}" [checked]="opItem.checked"
-                        (change)="changeOpItem(opItem, $event)">
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Zahlenbereich Operanden: </td>
-            <td>
-                <input type="number" id="operandMax" [(ngModel)]="operandMax" min="5" max="1000000"
-                    title="5 - 1.000.000">
-            </td>
-        </tr>
-    </table>
+<div class="start" xmlns="http://www.w3.org/1999/html">
+  <table>
+    <tr>
+      <td>Aufgaben:</td>
+      <td>
+        <input type="number" id="taskCount" [(ngModel)]="taskCount" min="1" max="100" title="1 - 100">
+      </td>
+    </tr>
+    <tr>
+      <td>Zahlenbereich:</td>
+      <td>
+        <input type="number" id="operandMax" [(ngModel)]="operandMax" min="5" max="1000000"
+               title="5 - 1.000.000">
+      </td>
+    </tr>
+    <tr>
+      <td>Operationen:</td>
+      <td style="text-align-last: justify;">
+        <div *ngFor="let opItem of operations">
+          <button type="button" (click)="changeOpItem(opItem, $event)" class="operation {{opItem.checked}}">{{opItem.name}}</button>
+        </div>
+      </td>
+    </tr>
+  </table>
 
-    <div class="buttonBar">
-        <button type="button" (click)="startTasks()" [disabled]="!isStartable()">Start</button>
-    </div>
+  <div class="buttonBar">
+    <button type="button" (click)="startTasks()" [disabled]="!isStartable()">Start</button>
+  </div>
 </div>

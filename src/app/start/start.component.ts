@@ -10,10 +10,10 @@ import { LifecycleService } from '../lifecycle.service';
 export class StartComponent {
 
   operations = [
-    { "checked": true, "value": Operation.ADDITION, "name": "plus - Addition" },
-    { "checked": true, "value": Operation.SUBTRACTION, "name": "minus - Subtraktion" },
-    { "checked": false, "value": Operation.MULTIPLICATION, "name": "mal - Multiplikation" },
-    { "checked": false, "value": Operation.DIVISION, "name": "durch - Division" },
+    { "checked": true, "value": Operation.ADDITION, "name": "plus" },
+    { "checked": true, "value": Operation.SUBTRACTION, "name": "minus" },
+    { "checked": false, "value": Operation.MULTIPLICATION, "name": "mal" },
+    { "checked": false, "value": Operation.DIVISION, "name": "durch" },
   ]
   taskCount: number = 5;
   operandMax: number = 10;
@@ -21,7 +21,7 @@ export class StartComponent {
   constructor(private lifecycleService: LifecycleService) { };
 
   changeOpItem(opItem: any, event: any): void {
-    opItem.checked = event.target.checked;
+    opItem.checked = !opItem.checked;
   }
 
   getSelectedOperations(): Operation[] {
