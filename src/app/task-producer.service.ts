@@ -66,6 +66,9 @@ export class TaskProducerService {
 
   private createDivTask(taskRange: TaskRange): Task {
     let ops: Pair = this.getTwoRandoms(taskRange);
+    while (ops.n2 == 0) {
+      ops = this.getTwoRandoms(taskRange);
+    }
     return {
       operation: Operation.DIVISION,
       operand1: ops.n1 * ops.n2,
