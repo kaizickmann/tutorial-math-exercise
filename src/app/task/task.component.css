@@ -1,17 +1,20 @@
 :host {
-    margin: 1em auto 0;
-}
-
-.task {
     border: 1px solid;
+    margin: 1em auto 0;
     padding: 1em;
     text-align: center;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.task div {
+.block {
+  display: flex;
+  justify-content: center;
+}
+
+.operand, .opcode, .result {
     display: inline-block;
     background-color: #cef;
     margin: 1em;
@@ -26,12 +29,12 @@
     border-radius: 1.5em;
 }
 
-.task div.result {
+.result {
     padding: .75em 1em;
     width: 4em;
 }
 
-.task div input {
+input {
     background-color: #e0f8ff;
     border: none;
     text-align: center;

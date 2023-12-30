@@ -1,12 +1,8 @@
 :host {
     margin: 1em auto 0;
-}
-
-.result {
     border: 1px solid;
     padding: 1em;
     text-align: center;
-    font-size: 2em;
 }
 
 .summary {
