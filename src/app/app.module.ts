@@ -7,6 +7,7 @@ import { TaskComponent } from './task/task.component';
 import { StartComponent } from './start/start.component';
 import { RoutingModule } from './routing.module';
 import { ResultComponent } from './result/result.component';
+import {SaveChoiceService} from "./start/save-choice.service";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { ResultComponent } from './result/result.component';
     FormsModule,
     RoutingModule
   ],
-  providers: [],
+  providers: [SaveChoiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

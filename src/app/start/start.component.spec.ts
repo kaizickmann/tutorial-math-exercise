@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { StartComponent } from './start.component';
-import { LifecycleService } from '../lifecycle.service';
-import { Operation } from '../domain/operation';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
+import {StartComponent} from './start.component';
+import {LifecycleService} from '../lifecycle.service';
+import {Operation} from '../domain/operation';
 
 describe('StartComponent', () => {
   let component: StartComponent;
@@ -36,7 +36,7 @@ describe('StartComponent', () => {
       })
     fixture.detectChanges();
     // now, the excercise should be startable
-    expect(component.isStartable()).toBeTrue();
+    expect(component.choice.isStartable()).toBeTrue();
     // and the button should be enabled as well
     expect(getStartButton().disabled).toBeFalse();
   });
@@ -61,7 +61,7 @@ describe('StartComponent', () => {
     unselectAllCheckboxes();
     fixture.detectChanges();
     // now, the excercise should NOT be startable
-    expect(component.isStartable()).toBeFalse();
+    expect(component.choice.isStartable()).toBeFalse();
     // and the button should be disabled as well
     expect(getStartButton().disabled).toBeTrue();
   });

@@ -3,20 +3,20 @@
     <tr>
       <td>Aufgaben:</td>
       <td>
-        <input type="number" id="taskCount" [(ngModel)]="taskCount" min="1" max="100" title="1 - 100">
+        <input type="number" id="taskCount" [(ngModel)]="choice.taskCount" min="1" max="100" title="1 - 100">
       </td>
     </tr>
     <tr>
       <td>Zahlenbereich:</td>
       <td>
-        <input type="number" id="operandMax" [(ngModel)]="operandMax" min="5" max="1000000"
+        <input type="number" id="operandMax" [(ngModel)]="choice.operandMax" min="5" max="1000000"
                title="5 - 1.000.000">
       </td>
     </tr>
     <tr>
       <td>Operationen:</td>
       <td style="text-align-last: justify;">
-        <div *ngFor="let opItem of operations">
+        <div *ngFor="let opItem of choice.operations">
           <button type="button" (click)="changeOpItem(opItem, $event)" class="operation {{opItem.checked}}">{{opItem.name}}</button>
         </div>
       </td>
@@ -24,6 +24,6 @@
   </table>
 
   <div class="buttonBar">
-    <button type="button" (click)="startTasks()" [disabled]="!isStartable()">Start</button>
+    <button type="button" (click)="startTasks()" [disabled]="!choice.isStartable()">Start</button>
   </div>
 </div>
