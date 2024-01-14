@@ -1,46 +1,35 @@
 :host {
-    border: 1px solid;
-    margin: 1em auto 0;
+    margin: 0 auto;
     padding: 1em;
+    width: 11em;
     text-align: center;
+    font-size: 2em;
+    font-weight: bold;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: center;
 }
 
-.block {
-  display: flex;
-  justify-content: center;
+.task div {
+  margin: .5em 0;
 }
 
-.operand, .opcode, .result {
-    display: inline-block;
-    background-color: #cef;
-    margin: 1em;
-    padding: .75em .5em;
-    width: 2em;
-    height: 1.5em;
-    font-weight: bold;
-    font-size: 2em;
-}
-
-.opcode {
-    border-radius: 1.5em;
+.quest {
+  padding: .5em 0;
+  background-color: #8ce;
 }
 
 .result {
-    padding: .75em 1em;
-    width: 4em;
+  border: 1px solid;
 }
 
 input {
+    width: 100%;
     background-color: #e0f8ff;
     border: none;
     text-align: center;
     padding: 0;
-    width: 3em;
-    height: 1.5em;
+    height: 2em;
     font-size: 1em;
     font-weight: bold;
 }
