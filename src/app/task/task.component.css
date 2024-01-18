@@ -33,3 +33,13 @@ input {
     font-size: 1em;
     font-weight: bold;
 }
+
+.clickboard {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: .5em;
+  padding: .5em 1em;
+  .zero {
+    grid-column: span 2;
+  }
+}

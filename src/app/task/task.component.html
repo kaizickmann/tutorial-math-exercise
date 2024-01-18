@@ -4,4 +4,9 @@
   <div class="result">
     <input id="userInput" [(ngModel)]="userInput" placeholder="?" (keydown.enter)="solved()">
   </div>
+  <div class="clickboard">
+    <app-key-button *ngFor="let number of [7,8,9,4,5,6,1,2,3]" digit='{{number}}' (clickEvent)='addKey($event)'></app-key-button>
+    <app-key-button digit='0' (clickEvent)='addKey($event)' class='zero'></app-key-button>
+    <app-key-button digit='X' (clickEvent)='addKey($event)'></app-key-button>
+  </div>
 </div>
