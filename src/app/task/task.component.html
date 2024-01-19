@@ -1,9 +1,7 @@
 <div class="task" *ngIf="task">
   <div class="quest">{{task.operand1}} {{task.operation}} {{task.operand2}}</div>
   <div class="comp">=</div>
-  <div class="result">
-    <input id="userInput" [(ngModel)]="userInput" placeholder="?" (keydown.enter)="solved()">
-  </div>
+  <div class="result" (click)="solved()"> {{userInput}}</div>
   <div class="clickboard">
     <app-key-button *ngFor="let number of [7,8,9,4,5,6,1,2,3]" digit='{{number}}' (clickEvent)='addKey($event)'></app-key-button>
     <app-key-button digit='0' (clickEvent)='addKey($event)' class='zero'></app-key-button>

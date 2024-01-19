@@ -21,17 +21,11 @@
 
 .result {
   border: 1px solid;
-}
-
-input {
-    width: 100%;
-    background-color: #e0f8ff;
-    border: none;
-    text-align: center;
-    padding: 0;
-    height: 2em;
-    font-size: 1em;
-    font-weight: bold;
+  background-color: #e0f8ff;
+  height: 2em;
+  line-height: 2em;
+  font-weight: normal;
+  text-align: center;
 }
 
 .clickboard {
