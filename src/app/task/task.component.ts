@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../domain/task';
 import { LifecycleService } from '../lifecycle.service';
+import {EMPTY} from "rxjs";
 
 @Component({
   selector: 'app-task',
@@ -9,8 +10,10 @@ import { LifecycleService } from '../lifecycle.service';
 })
 export class TaskComponent implements OnInit {
 
+  private EMPTY = "";
+
   task?: Task;
-  userInput: string = "";
+  userInput: string = this.EMPTY;
 
   constructor(private lifecycleService: LifecycleService) { }
 
@@ -38,6 +41,14 @@ export class TaskComponent implements OnInit {
       // here, we go...
       this.lifecycleService.solveTask(this.task, userAnswer);
       this.resetComponent();
+    }
+  }
+
+  addKey(keyClicked: string) {
+    if (isNaN(+Number(keyClicked))) {
+      this.userInput = this.EMPTY;
+    } else {
+      this.userInput += keyClicked;
     }
   }
 }

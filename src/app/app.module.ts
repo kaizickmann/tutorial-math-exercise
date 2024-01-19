@@ -7,11 +7,14 @@ import { TaskComponent } from './task/task.component';
 import { StartComponent } from './start/start.component';
 import { RoutingModule } from './routing.module';
 import { ResultComponent } from './result/result.component';
+import {SaveChoiceService} from "./start/save-choice.service";
+import {KeyButtonComponent} from "./task/key-button.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskComponent,
+    KeyButtonComponent,
     StartComponent,
     ResultComponent
   ],
@@ -20,7 +23,7 @@ import { ResultComponent } from './result/result.component';
     FormsModule,
     RoutingModule
   ],
-  providers: [],
+  providers: [SaveChoiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

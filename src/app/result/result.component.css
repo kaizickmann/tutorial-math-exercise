@@ -1,11 +1,18 @@
 :host {
-    margin: 1em auto 0;
-    border: 1px solid;
+    margin: 0 auto;
     padding: 1em;
+    width: 24em;
     text-align: center;
+    font-size: 1em;
+}
+
+.headline {
+  font-size: 3em;
+  padding: .5em 0;
 }
 
 .summary {
+    font-size: 1.5em;
     border: 1px solid;
     background-color: #8ce;
     margin: 1em 0;
@@ -17,13 +24,12 @@
 
 .summary div {
     display: inline-block;
-    padding: 0 1em;
+    padding: 0 .5em;
     height: 1.5em;
 }
 
-.headline {
-    font-size: 1.5em;
-    padding: 1em 0;
+table {
+  width: 100%;
 }
 
 thead td {
@@ -51,7 +57,6 @@ tr:nth-child(2n) {
 .buttonBar button {
     background-color: #8ce;
     padding: 1em 2em;
-    font-size: .75em;
 }
 
 .buttonBar button:hover {

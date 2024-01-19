@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+div {
+  line-height: 1em;
+  padding: .5em;
+  border: 1px solid;
+  background-color: #8ce;
+}
+
+div:hover {
+  background-color: #cef;
+}
+

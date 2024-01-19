@@ -1,15 +1,10 @@
 <div class="task" *ngIf="task">
-  <div class="block">
-    <div class="operand one">{{task.operand1}}</div>
-    <div class="opcode operation">{{task.operation}}</div>
-    <div class="operand two">{{task.operand2}}</div>
-  </div>
-  <div class="block">
-    <div class="opcode comp">=</div>
-  </div>
-  <div class="block">
-    <div class="result">
-        <input id="userInput" [(ngModel)]="userInput" placeholder="?" (keydown.enter)="solved()">
-    </div>
+  <div class="quest">{{task.operand1}} {{task.operation}} {{task.operand2}}</div>
+  <div class="comp">=</div>
+  <div class="result" (click)="solved()"> {{userInput}}</div>
+  <div class="clickboard">
+    <app-key-button *ngFor="let number of [7,8,9,4,5,6,1,2,3]" digit='{{number}}' (clickEvent)='addKey($event)'></app-key-button>
+    <app-key-button digit='0' (clickEvent)='addKey($event)' class='zero'></app-key-button>
+    <app-key-button digit='X' (clickEvent)='addKey($event)'></app-key-button>
   </div>
 </div>

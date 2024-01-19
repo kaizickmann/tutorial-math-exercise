@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Operation } from '../domain/operation';
-import { LifecycleService } from '../lifecycle.service';
+import {Component} from '@angular/core';
+import {LifecycleService} from '../lifecycle.service';
+import {StartChoice} from "./startChoice";
+import {SaveChoiceService} from "./save-choice.service";
 
 @Component({
   selector: 'app-start',
@@ -9,34 +10,25 @@ import { LifecycleService } from '../lifecycle.service';
 })
 export class StartComponent {
 
-  operations = [
-    { "checked": true, "value": Operation.ADDITION, "name": "plus" },
-    { "checked": true, "value": Operation.SUBTRACTION, "name": "minus" },
-    { "checked": false, "value": Operation.MULTIPLICATION, "name": "mal" },
-    { "checked": false, "value": Operation.DIVISION, "name": "durch" },
-  ]
-  taskCount: number = 5;
-  operandMax: number = 10;
+  choice: StartChoice = new StartChoice();
 
-  constructor(private lifecycleService: LifecycleService) { };
+  constructor(private lifecycleService: LifecycleService, private saveChoiceService: SaveChoiceService) {
+  };
+
+  ngOnInit(): void {
+    this.choice = this.saveChoiceService.choice;
+  }
 
   changeOpItem(opItem: any, event: any): void {
     opItem.checked = !opItem.checked;
   }
 
-  getSelectedOperations(): Operation[] {
-    return this.operations.filter(item => item.checked).map(item => item.value);
-  }
-
-  isStartable(): boolean {
-    return this.getSelectedOperations().length > 0;
-  }
-
   startTasks(): void {
+    this.saveChoiceService.choice = this.choice;
     this.lifecycleService.start(
-      this.taskCount,
-      this.getSelectedOperations(),
-      this.operandMax);
+      this.choice.taskCount,
+      this.choice.getSelectedOperations(),
+      this.choice.operandMax);
   }
 
 }
